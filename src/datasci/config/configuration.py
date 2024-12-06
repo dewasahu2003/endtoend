@@ -1,6 +1,7 @@
 from src.datasci.constants import (CONFIG_FILE_PATH, PARAMS_FILE_PATH,
                                    SCHEMA_FILE_PATH)
-from src.datasci.entity.config_entity import DataIngestionCofig
+from src.datasci.entity.config_entity import (DataIngestionCofig,
+                                              DataValidationConfig)
 from src.datasci.utils.common import create_directories, read_yaml
 
 
@@ -25,3 +26,18 @@ class ConfiguratonManager:
             unzip_dir=config.unzip_dir
         )
         return data_ingestion_config
+    
+    def get_data_validation_config(self)->DataValidationConfig:
+        config = self.config.data_validation
+        schema = self.schema.COLUMNS
+        
+        create_directories([config.root_dir])
+        
+        data_validation_config = DataValidationConfig(
+            root_dir=config.root_dir,
+            STATUS_FILE=config.STATUS_FILE,
+            unzip_data_dir=config.unzip_data_dir,
+            all_schema=schema,
+            
+        )
+        return data_validation_config
