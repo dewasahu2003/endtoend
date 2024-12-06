@@ -1,6 +1,6 @@
 from src.datasci.constants import (CONFIG_FILE_PATH, PARAMS_FILE_PATH,
                                    SCHEMA_FILE_PATH)
-from src.datasci.entity.config_entity import (DataIngestionCofig,
+from src.datasci.entity.config_entity import (DataIngestionCofig, DataTransformationConfig,
                                               DataValidationConfig)
 from src.datasci.utils.common import create_directories, read_yaml
 
@@ -41,3 +41,12 @@ class ConfiguratonManager:
             
         )
         return data_validation_config
+        
+    def get_data_transformation_config(self)-> DataTransformationConfig:
+        config = self.config.data_transformation
+        create_directories([config.root_dir])
+        data_transformation=DataTransformationConfig(
+            root_dir=config.root_dir,
+            data_path=config.data_path
+        )
+        return data_transformation
