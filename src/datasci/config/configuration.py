@@ -1,7 +1,7 @@
 from src.datasci.constants import (CONFIG_FILE_PATH, PARAMS_FILE_PATH,
                                    SCHEMA_FILE_PATH)
 from src.datasci.entity.config_entity import (DataIngestionCofig, DataTransformationConfig,
-                                              DataValidationConfig, ModelTrainerConfig)
+                                              DataValidationConfig, ModelEvalConfig, ModelTrainerConfig)
 from src.datasci.utils.common import create_directories, read_yaml
 
 
@@ -68,4 +68,20 @@ class ConfiguratonManager:
             target_column=schema.name
         )
         return model_config
+    
+    def get_model_eval_config(self)-> ModelEvalConfig:
+        config = self.config.model_evaluation
+        param = self.params.ElasticNet
+        schema = self.schema.TARGET_COLUMN
+        create_directories([config.root_dir])
+        
+        model_eval_config = ModelEvalConfig(
+            root_dir=config.root_dir,
+            test_data_path=config.test_data_path,
+            model_path=config.model_path,
+            metric_file=config.metric_file,
+            all_params=param,
+            target_column=schema.name,
+            mlflow_uri="https://dagshub.com/dewasahu2003/endtoend.mlflow")
+        return model_eval_config
         

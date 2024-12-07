@@ -1,4 +1,5 @@
 pandas
+dvc
 mlflow
 notebook
 numpy
