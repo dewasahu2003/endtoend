@@ -1,4 +1,4 @@
-# End-to-End Machine Learning Project
+# Wine Quality Prediction End-to-End Machine Learning Project
 
 ## 📊 Project Overview
 A comprehensive machine learning project with a complete pipeline from data ingestion to model deployment, featuring modular architecture, MLflow tracking, and Flask web application.
